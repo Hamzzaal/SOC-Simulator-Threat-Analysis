@@ -3,143 +3,567 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SOC Simulator – Threat Analysis & Incident Response</title>
+    <title>Hamzah Ali Al-Haidari | SOC Analyst Portfolio</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
-        body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background-color: #0d1117;
-            color: #c9d1d9;
+        * {
             margin: 0;
             padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
         }
+
+        :root {
+            --primary: #58a6ff;
+            --secondary: #1f6feb;
+            --dark-bg: #0d1117;
+            --card-bg: #161b22;
+            --border: #30363d;
+            --text: #c9d1d9;
+            --text-secondary: #8b949e;
+            --success: #3fb950;
+            --warning: #d29922;
+            --danger: #f85149;
+        }
+
+        body {
+            background-color: var(--dark-bg);
+            color: var(--text);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        /* Header & Navigation */
         header {
-            background-color: #161b22;
-            padding: 30px;
-            text-align: center;
-            border-bottom: 2px solid #30363d;
+            background: linear-gradient(135deg, var(--dark-bg) 0%, #161b22 100%);
+            padding: 1rem 2rem;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            border-bottom: 1px solid var(--border);
+            backdrop-filter: blur(10px);
         }
-        header h1 {
-            margin: 0;
-            color: #58a6ff;
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1200px;
+            margin: 0 auto;
         }
-        header p {
-            color: #8b949e;
-            margin-top: 5px;
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--primary);
         }
-        main {
-            padding: 30px;
-            max-width: 1000px;
-            margin: auto;
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
         }
-        section {
-            margin-bottom: 40px;
-        }
-        h2 {
-            color: #58a6ff;
-            border-bottom: 1px solid #30363d;
-            padding-bottom: 5px;
-        }
-        img {
-            display: block;
-            margin: 20px auto;
-            max-width: 100%;
-            border-radius: 8px;
-            box-shadow: 0 0 10px #161b22;
-        }
-        ul {
-            list-style-type: square;
-            padding-left: 20px;
-        }
-        a {
-            color: #58a6ff;
+
+        .nav-links a {
+            color: var(--text);
             text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s;
         }
-        a:hover {
-            text-decoration: underline;
+
+        .nav-links a:hover {
+            color: var(--primary);
         }
-        .metrics {
-            background-color: #161b22;
-            padding: 15px;
-            border-radius: 8px;
-            border: 1px solid #30363d;
+
+        /* Hero Section */
+        .hero {
+            padding: 10rem 2rem 5rem;
+            text-align: center;
+            background: linear-gradient(135deg, #0d1117 0%, #161b22 100%);
+            position: relative;
+            overflow: hidden;
         }
-        .metrics p {
-            margin: 5px 0;
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle at 20% 80%, rgba(31, 111, 235, 0.1) 0%, transparent 50%),
+                        radial-gradient(circle at 80% 20%, rgba(88, 166, 255, 0.1) 0%, transparent 50%);
+            z-index: 0;
+        }
+
+        .hero-content {
+            max-width: 800px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 1;
+        }
+
+        .hero h1 {
+            font-size: 3.5rem;
+            margin-bottom: 1rem;
+            background: linear-gradient(90deg, var(--primary), var(--secondary));
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            color: var(--text-secondary);
+            margin-bottom: 2rem;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 0.8rem 1.5rem;
+            background: var(--primary);
+            color: white;
+            border-radius: 5px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s;
+            border: none;
+            cursor: pointer;
+        }
+
+        .btn:hover {
+            background: var(--secondary);
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(31, 111, 235, 0.4);
+        }
+
+        /* Sections */
+        section {
+            padding: 5rem 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 3rem;
+            font-size: 2.5rem;
+            color: var(--primary);
+        }
+
+        /* Project Overview */
+        .overview-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .card {
+            background: var(--card-bg);
+            border-radius: 10px;
+            padding: 2rem;
+            border: 1px solid var(--border);
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+        }
+
+        .card h3 {
+            color: var(--primary);
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .card i {
+            font-size: 1.2rem;
+        }
+
+        /* Metrics */
+        .metrics-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .metric-card {
+            background: var(--card-bg);
+            border-radius: 10px;
+            padding: 1.5rem;
+            text-align: center;
+            border: 1px solid var(--border);
+        }
+
+        .metric-value {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+        }
+
+        .metric-success {
+            color: var(--success);
+        }
+
+        .metric-warning {
+            color: var(--warning);
+        }
+
+        .metric-info {
+            color: var(--primary);
+        }
+
+        .metric-label {
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+        }
+
+        /* Skills */
+        .skills-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .skill-category h3 {
+            color: var(--primary);
+            margin-bottom: 1rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .skill-list {
+            list-style: none;
+        }
+
+        .skill-list li {
+            margin-bottom: 0.8rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .skill-list i {
+            color: var(--success);
+        }
+
+        /* Alerts Table */
+        .alerts-section {
+            overflow-x: auto;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 1rem;
+        }
+
+        th, td {
+            padding: 1rem;
+            text-align: left;
+            border-bottom: 1px solid var(--border);
+        }
+
+        th {
+            background-color: var(--card-bg);
+            color: var(--primary);
+            font-weight: 600;
+        }
+
+        tr:hover {
+            background-color: rgba(88, 166, 255, 0.05);
+        }
+
+        .severity-high {
+            color: var(--danger);
+            font-weight: 600;
+        }
+
+        .severity-medium {
+            color: var(--warning);
+            font-weight: 600;
+        }
+
+        .severity-low {
+            color: var(--success);
+            font-weight: 600;
+        }
+
+        /* CTA Section */
+        .cta {
+            text-align: center;
+            background: linear-gradient(135deg, var(--dark-bg) 0%, #161b22 100%);
+            padding: 5rem 2rem;
+            border-radius: 10px;
+            margin: 2rem auto;
+            border: 1px solid var(--border);
+        }
+
+        .cta h2 {
+            margin-bottom: 1.5rem;
+            font-size: 2.5rem;
+        }
+
+        /* Footer */
+        footer {
+            background: var(--card-bg);
+            padding: 3rem 2rem;
+            text-align: center;
+            border-top: 1px solid var(--border);
+        }
+
+        .footer-content {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .social-links {
+            display: flex;
+            justify-content: center;
+            gap: 1.5rem;
+            margin: 2rem 0;
+        }
+
+        .social-links a {
+            color: var(--text);
+            font-size: 1.5rem;
+            transition: color 0.3s;
+        }
+
+        .social-links a:hover {
+            color: var(--primary);
+        }
+
+        .copyright {
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+            
+            .nav-links {
+                display: none;
+            }
+            
+            section {
+                padding: 3rem 1rem;
+            }
         }
     </style>
 </head>
 <body>
+    <!-- Header & Navigation -->
     <header>
-        <h1>SOC Simulator – Threat Analysis & Incident Response</h1>
-        <p>Platform: ETH.CYBER | Date: September 2025 | Author: Hamzah Ali Al-Haidari</p>
-    </header>
-    <main>
-        <section>
-            <h2>Overview</h2>
-            <p>This project documents my experience in a SOC Simulator, a realistic cybersecurity analyst environment designed to enhance threat intelligence and incident response skills.</p>
-            <img src="images/scenario_victory.png" alt="Scenario Victory">
-        </section>
-
-        <section>
-            <h2>Tools Used</h2>
-            <ul>
-                <li><strong>Splunk SIEM</strong> – centralized log collection and analysis</li>
-                <li><strong>Wireshark</strong> – network traffic analysis</li>
-                <li><strong>PowerShell</strong> – automation and incident investigation</li>
-                <li><strong>VirusTotal</strong> – file and URL reputation analysis</li>
-            </ul>
-        </section>
-
-        <section>
-            <h2>Project Description</h2>
-            <p>During this scenario, I:</p>
-            <ul>
-                <li>Analyzed alerts in real-time and classified them as malicious or benign</li>
-                <li>Investigated phishing campaigns and suspicious process relationships</li>
-                <li>Correlated digital evidence to determine attack sources and response strategies</li>
-                <li>Prepared AI-reviewed incident reports highlighting IOCs and mitigation actions</li>
-            </ul>
-            <img src="images/true_positive_rate.png" alt="True Positive Rate">
-        </section>
-
-        <section>
-            <h2>Results & Skills Gained</h2>
-            <ul>
-                <li>Achieved 100% accuracy in identifying true positives and false positives</li>
-                <li>Managed and resolved 21 alerts with a mean response time of 3 minutes</li>
-                <li>Enhanced skills in <strong>digital forensics, technical analysis, and real-time incident response</strong></li>
-            </ul>
-            <img src="images/false_positive_rate.png" alt="False Positive Rate">
-
-            <div class="metrics">
-                <p><strong>Key Metrics:</strong></p>
-                <p>✅ True Positive Identification Rate: 100%</p>
-                <p>✅ False Positive Identification Rate: 100%</p>
-                <p>⏱ Mean Time to Resolve Alerts: 3 minutes</p>
-                <p>⏱ Mean Dwell Time: 34 minutes</p>
-                <p>🔗 <a href="https://tryhackme.com/soc-sim/public-summary/43530c56ac032568b639fa7ca14b880c2a6280977e144e1cf3fc6f1b85200943e9adc5d216aa9a4fa895cdf2f873bfd9" target="_blank">View Project Summary on TryHackMe</a></p>
+        <nav>
+            <div class="logo">HAMZAH AL-HAIDARI</div>
+            <div class="nav-links">
+                <a href="#overview">Overview</a>
+                <a href="#metrics">Performance</a>
+                <a href="#skills">Skills</a>
+                <a href="#alerts">Alert Analysis</a>
+                <a href="#contact">Contact</a>
             </div>
-        </section>
+        </nav>
+    </header>
 
-        <section>
-            <h2>File Structure</h2>
-            <ul>
-                <li><code>PDF/</code> – Full project report</li>
-                <li><code>images/</code> – Scenario screenshots</li>
-                <li><code>scripts/</code> – Python automation or analysis scripts</li>
-                <li><code>attachments/</code> – sample email attachments for training and analysis</li>
-            </ul>
-        </section>
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-content">
+            <h1>SOC Analyst Portfolio</h1>
+            <p>Threat Detection • Incident Response • Security Analysis</p>
+            <p>Showcasing my performance in a realistic SOC Simulator environment with 100% accuracy in threat identification</p>
+            <a href="#overview" class="btn">View My Work</a>
+        </div>
+    </section>
 
-        <section>
-            <h2>Summary</h2>
-            <p>This SOC Simulator project improved my hands-on skills in real-time threat detection, incident response, and digital forensics. It provided practical experience in a dynamic SOC environment, enhancing my technical analysis and investigative capabilities.</p>
-        </section>
+    <!-- Project Overview -->
+    <section id="overview">
+        <h2 class="section-title">Project Overview</h2>
+        <div class="overview-grid">
+            <div class="card">
+                <h3><i class="fas fa-bullseye"></i> Objective</h3>
+                <p>Execute real-time threat detection and incident response in a simulated Security Operations Center (SOC) environment, identifying and mitigating multi-vector cyber attacks.</p>
+            </div>
+            <div class="card">
+                <h3><i class="fas fa-tasks"></i> Scenario</h3>
+                <p>Analyzed 21 security alerts to prevent a security breach, demonstrating proficiency in threat intelligence, log analysis, and digital forensics.</p>
+            </div>
+            <div class="card">
+                <h3><i class="fas fa-trophy"></i> Achievement</h3>
+                <p>Achieved perfect classification accuracy (100% true positive and false positive rates) and successfully prevented a security breach.</p>
+            </div>
+        </div>
+    </section>
 
-        <section>
-            <h2>License</h2>
-            <p>This project is for educational purposes and open for review and learning.</p>
-        </section>
-    </main>
+    <!-- Performance Metrics -->
+    <section id="metrics">
+        <h2 class="section-title">Performance Metrics</h2>
+        <div class="metrics-grid">
+            <div class="metric-card">
+                <div class="metric-value metric-success">100%</div>
+                <div class="metric-label">True Positive Rate</div>
+            </div>
+            <div class="metric-card">
+                <div class="metric-value metric-success">100%</div>
+                <div class="metric-label">False Positive Rate</div>
+            </div>
+            <div class="metric-card">
+                <div class="metric-value metric-info">21</div>
+                <div class="metric-label">Alerts Processed</div>
+            </div>
+            <div class="metric-card">
+                <div class="metric-value metric-warning">3min</div>
+                <div class="metric-label">Mean Time to Respond</div>
+            </div>
+            <div class="metric-card">
+                <div class="metric-value metric-warning">34min</div>
+                <div class="metric-label">Mean Dwell Time</div>
+            </div>
+            <div class="metric-card">
+                <div class="metric-value metric-success">1210</div>
+                <div class="metric-label">Final Score</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Skills Demonstrated -->
+    <section id="skills">
+        <h2 class="section-title">Skills Demonstrated</h2>
+        <div class="skills-container">
+            <div class="skill-category">
+                <h3>Threat Detection</h3>
+                <ul class="skill-list">
+                    <li><i class="fas fa-check-circle"></i> Suspicious Process Analysis</li>
+                    <li><i class="fas fa-check-circle"></i> Phishing Email Investigation</li>
+                    <li><i class="fas fa-check-circle"></i> Network Anomaly Detection</li>
+                    <li><i class="fas fa-check-circle"></i> IOC Identification</li>
+                    <li><i class="fas fa-check-circle"></i> Behavioral Analysis</li>
+                </ul>
+            </div>
+            <div class="skill-category">
+                <h3>Incident Response</h3>
+                <ul class="skill-list">
+                    <li><i class="fas fa-check-circle"></i> Alert Triage & Prioritization</li>
+                    <li><i class="fas fa-check-circle"></i> Binary Classification</li>
+                    <li><i class="fas fa-check-circle"></i> Incident Containment</li>
+                    <li><i class="fas fa-check-circle"></i> Security Report Writing</li>
+                    <li><i class="fas fa-check-circle"></i> MITRE ATT&CK Mapping</li>
+                </ul>
+            </div>
+            <div class="skill-category">
+                <h3>Technical Tools</h3>
+                <ul class="skill-list">
+                    <li><i class="fas fa-check-circle"></i> SIEM Platforms</li>
+                    <li><i class="fas fa-check-circle"></i> Wireshark</li>
+                    <li><i class="fas fa-check-circle"></i> PowerShell</li>
+                    <li><i class="fas fa-check-circle"></i> VirusTotal</li>
+                    <li><i class="fas fa-check-circle"></i> Log Analysis</li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <!-- Alert Analysis -->
+    <section id="alerts" class="alerts-section">
+        <h2 class="section-title">Alert Analysis</h2>
+        <table>
+            <thead>
+                <tr>
+                    <th>Alert ID</th>
+                    <th>Rule</th>
+                    <th>Severity</th>
+                    <th>Type</th>
+                    <th>Time to Resolve</th>
+                    <th>Classification</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>1027</td>
+                    <td>Suspicious Parent Child Relationship</td>
+                    <td class="severity-high">High</td>
+                    <td>Process</td>
+                    <td>9.47 minutes</td>
+                    <td class="severity-success">True Positive</td>
+                </tr>
+                <tr>
+                    <td>1023</td>
+                    <td>Network drive mapped to a local drive</td>
+                    <td class="severity-medium">Medium</td>
+                    <td>Execution</td>
+                    <td>4.08 minutes</td>
+                    <td class="severity-success">True Positive</td>
+                </tr>
+                <tr>
+                    <td>1007</td>
+                    <td>Suspicious Attachment found in email</td>
+                    <td class="severity-low">Low</td>
+                    <td>Phishing</td>
+                    <td>1.63 minutes</td>
+                    <td class="severity-success">True Positive</td>
+                </tr>
+                <tr>
+                    <td>1000</td>
+                    <td>Suspicious email from external domain</td>
+                    <td class="severity-low">Low</td>
+                    <td>Phishing</td>
+                    <td>10.43 minutes</td>
+                    <td class="severity-success">False Positive</td>
+                </tr>
+                <!-- Additional rows can be added here -->
+            </tbody>
+        </table>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="cta">
+        <h2>Ready to Secure Your Organization?</h2>
+        <p>I'm passionate about cybersecurity and ready to contribute to your security team with my analytical skills and threat detection expertise.</p>
+        <a href="#contact" class="btn">Get In Touch</a>
+    </section>
+
+    <!-- Contact & Footer -->
+    <footer id="contact">
+        <div class="footer-content">
+            <h2>Hamzah Ali Al-Haidari</h2>
+            <p>SOC Analyst | Threat Hunter | Cybersecurity Enthusiast</p>
+            <div class="social-links">
+                <a href="#"><i class="fab fa-linkedin"></i></a>
+                <a href="#"><i class="fab fa-github"></i></a>
+                <a href="#"><i class="fas fa-envelope"></i></a>
+                <a href="#"><i class="fab fa-twitter"></i></a>
+            </div>
+            <p class="copyright">© 2025 Hamzah Ali Al-Haidari. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script>
+        // Smooth scrolling for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+
+        // Add scroll effect to header
+        window.addEventListener('scroll', function() {
+            const header = document.querySelector('header');
+            if (window.scrollY > 100) {
+                header.style.backgroundColor = 'rgba(13, 17, 23, 0.95)';
+            } else {
+                header.style.backgroundColor = '';
+            }
+        });
+    </script>
 </body>
 </html>
